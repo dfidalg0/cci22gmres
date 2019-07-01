@@ -1,5 +1,5 @@
 from numpy import *
-from numpy.linalg import norm
+from numpy.linalg import norm, LinAlgError
 
 def applyGivensRotation (rot,v):
     s = rot[0]
