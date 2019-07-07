@@ -25,7 +25,7 @@ for method in methods:
     for n in range(1,N+1):
         b = zeros(N)
         for j in range(n):
-            b += rand()*100*v[:,j]
+            b += (1 + rand()*99)*v[:,j]
 
         t = [0]*35
         for i in range(35):
