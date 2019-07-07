@@ -1,7 +1,6 @@
 # Testes de funcionamento do GMRES
 from gmres import *
 from numpy.random import rand, randint
-from numpy.linalg import cond
 from matplotlib.pyplot import *
 from timeit import default_timer
 
@@ -10,9 +9,6 @@ from timeit import default_timer
 n = 100
 
 A = rand(n,n)*100
-while cond(A) > 1000:
-    A = rand(n,n)
-print(cond(A))
 
 b = rand(n)*100
 
@@ -29,7 +25,6 @@ else:
     plot(err)
     show()
 
-exit()
 # Teste 2 - Sistema esparso
 
 for i in range(100*50):
