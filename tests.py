@@ -22,7 +22,7 @@ else:
     print('Successfully executed')
     print('Time elapsed for dense system:',t1-t0)
     yscale('log')
-    plot(err)
+    plot(arange(1,101),err)
     show()
 
 # Teste 2 - Sistema esparso
@@ -40,7 +40,7 @@ else:
     print('Successfully executed')
     print('Time elapsed for sparse system:',t1-t0)
     yscale('log')
-    plot(err)
+    plot(arange(1,101),err)
     show()
 
 # Teste 3 - Sistema singular

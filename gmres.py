@@ -16,7 +16,9 @@ def GMRES (A,b,tolerance = 1e-6):
 
     rotations = [None]*n # Vetor para armazenar as rotações de Given acumuladas
 
-    ERR = []
+    ERR = [None]*n # Vetor para armazenar os erros das iterações
+
+    err = 1
 
     for j in range(n):
         Q[:,j] = v/h
@@ -39,16 +41,13 @@ def GMRES (A,b,tolerance = 1e-6):
         H[j:j+2,j] = applyGivensRotation(rot,H[j:j+2,j])
         u[j:j+2] = applyGivensRotation(rot,u[j:j+2])
 
-        z = triangularSolve(H[:j+1,:j+1],u[:j+1])
+        ERR[j] = err = abs(rotations[j][0]*err) # Erro calculado com base nas rotações de Givens acumuladas
 
-        x = Q[:,:j+1].dot(z)
-
-        err = norm(A.dot(x) - b)/norm(b)
-
-        ERR.append(err)
-
-        if  err < tolerance:
+        if err < tolerance:
+            z = triangularSolve(H[:j+1,:j+1],u[:j+1])
+            x = Q[:,:j+1].dot(z)
             ERR = array(ERR)
+            ERR = ERR[ERR != None]
             return x,ERR
 
     raise LinAlgError ('Singular Matrix') # Matriz muito mal condicionada
