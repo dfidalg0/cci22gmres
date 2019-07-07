@@ -1,5 +1,9 @@
 # Importando funções do numpy e de algebra linear
 from utils import *
+from numpy.linalg import solve
+
+NumpySolve = solve
+NumpySolve.__name__ = 'NumpySolve'
 
 def GMRES (A,b,tolerance = 1e-6):
     assertValidSystem(A,b) # Verificação de erros
@@ -51,3 +55,23 @@ def GMRES (A,b,tolerance = 1e-6):
             return x,ERR
 
     raise LinAlgError ('Singular Matrix') # Matriz muito mal condicionada
+
+def GaussElimination (A,b):
+    assertValidSystem(A,b) # Verificação de erros
+
+    U = A.copy()
+    v = b.copy()
+
+    n = b.size
+
+    for i in range(n-1):
+        m = i + argmax(U[i:,i])
+        if m != i:
+            U[[i,m]],v[[i,m]] = U[[m,i]],v[[m,i]]
+
+        for j in range(i+1,n):
+            k = U[j,i]/U[i,i]
+            U[j] -= k*U[i]
+            v[j] -= k*v[i]
+
+    return triangularSolve(U,v)

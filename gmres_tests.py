@@ -1,7 +1,8 @@
 # Testes de funcionamento do GMRES
-from gmres import *
+from solveMethods import GMRES
+from numpy import *
+from numpy.linalg import LinAlgError
 from numpy.random import rand, randint
-from matplotlib.pyplot import *
 from timeit import default_timer
 
 # Teste 1 - Sistema denso
@@ -21,9 +22,6 @@ except:
 else:
     print('Successfully executed')
     print('Time elapsed for dense system:',t1-t0)
-    yscale('log')
-    plot(arange(1,101),err)
-    show()
 
 # Teste 2 - Sistema esparso
 
@@ -39,9 +37,6 @@ except:
 else:
     print('Successfully executed')
     print('Time elapsed for sparse system:',t1-t0)
-    yscale('log')
-    plot(arange(1,101),err)
-    show()
 
 # Teste 3 - Sistema singular
 

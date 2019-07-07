@@ -1,11 +1,8 @@
-from gauss import *
-from gmres import *
+from solveMethods import *
 from numpy.random import rand
-from numpy.linalg import eig,solve
+from numpy.linalg import eig
 from matplotlib.pyplot import *
 from timeit import default_timer
-
-solve.__name__ = 'NumpySolve'
 
 N = 100
 
@@ -30,8 +27,8 @@ for method in methods:
         for j in range(n):
             b += rand()*100*v[:,j]
 
-        t = [0]*50
-        for i in range(20):
+        t = [0]*35
+        for i in range(35):
             t0 = default_timer()
             method(A,b)
             t1 = default_timer()
@@ -44,11 +41,11 @@ for method in methods:
 
 graphs = []
 
-for method in T.keys():
+legends = T.keys()
+
+for method in legends:
     ax, = plot(arange(1,N+1),T[method])
     graphs.append(ax)
-
-legends = [method.__name__ for method in methods]
 
 legend(graphs,legends)
 
