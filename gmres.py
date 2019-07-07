@@ -16,6 +16,8 @@ def GMRES (A,b,tolerance = 1e-6):
 
     rotations = [None]*n # Vetor para armazenar as rotações de Given acumuladas
 
+    ERR = []
+
     for j in range(n):
         Q[:,j] = v/h
         v = A.dot(Q[:,j])
@@ -43,8 +45,11 @@ def GMRES (A,b,tolerance = 1e-6):
 
         err = norm(A.dot(x) - b)/norm(b)
 
+        ERR.append(err)
+
         if  err < tolerance:
-            return x
+            ERR = array(ERR)
+            return x,ERR
 
     raise LinAlgError ('Singular Matrix') # Matriz muito mal condicionada
 
