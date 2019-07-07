@@ -1,8 +1,7 @@
 # Importando funções do numpy e de algebra linear
 from utils import *
-from numpy.linalg import solve
+from numpy.linalg import solve as NumpySolve
 
-NumpySolve = solve
 NumpySolve.__name__ = 'NumpySolve'
 
 def GMRES (A,b,tolerance = 1e-6):
@@ -31,6 +30,7 @@ def GMRES (A,b,tolerance = 1e-6):
         H[0,j] = Q[:,0].dot(v)
         v -= H[0,j]*Q[:,0]
 
+        # Processo de Arnoldi
         for i in range(j):
             H[i+1,j] = Q[:,i+1].dot(v)
             v -= H[i+1,j]*Q[:,i+1]
@@ -40,6 +40,7 @@ def GMRES (A,b,tolerance = 1e-6):
         h = norm(v)
         H[j+1,j] = h
 
+        # Determinação da solução de mínimos quadrados Hz = Qj'||b||e1
         rot = rotations[j] = getGivensRotation(H[j:j+2,j])
 
         H[j:j+2,j] = applyGivensRotation(rot,H[j:j+2,j])
@@ -54,7 +55,8 @@ def GMRES (A,b,tolerance = 1e-6):
             ERR = ERR[ERR != None]
             return x,ERR
 
-    raise LinAlgError ('Singular Matrix') # Matriz muito mal condicionada
+    # Matriz muito mal condicionada
+    raise LinAlgError ('Singular Matrix')
 
 def GaussElimination (A,b):
     assertValidSystem(A,b) # Verificação de erros
@@ -65,10 +67,12 @@ def GaussElimination (A,b):
     n = b.size
 
     for i in range(n-1):
+        # Pivoteamento
         m = i + argmax(U[i:,i])
         if m != i:
             U[[i,m]],v[[i,m]] = U[[m,i]],v[[m,i]]
 
+        # Eliminação
         for j in range(i+1,n):
             k = U[j,i]/U[i,i]
             U[j] -= k*U[i]
