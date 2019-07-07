@@ -1,8 +1,8 @@
 # Testes de funcionamento do GMRES
 from gmres import *
 from numpy.random import rand, randint
-from numpy.linalg import solve
-from matplotlib.pyplot import plot,show
+from numpy.linalg import cond
+from matplotlib.pyplot import *
 from timeit import default_timer
 
 # Teste 1 - Sistema denso
@@ -10,6 +10,9 @@ from timeit import default_timer
 n = 100
 
 A = rand(n,n)*100
+while cond(A) > 1000:
+    A = rand(n,n)
+print(cond(A))
 
 b = rand(n)*100
 
@@ -22,9 +25,11 @@ except:
 else:
     print('Successfully executed')
     print('Time elapsed for dense system:',t1-t0)
+    yscale('log')
     plot(err)
     show()
 
+exit()
 # Teste 2 - Sistema esparso
 
 for i in range(100*50):
@@ -39,6 +44,7 @@ except:
 else:
     print('Successfully executed')
     print('Time elapsed for sparse system:',t1-t0)
+    yscale('log')
     plot(err)
     show()
 

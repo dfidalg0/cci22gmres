@@ -2,7 +2,7 @@
 from utils import *
 
 def GMRES (A,b,tolerance = 1e-6):
-    _testForErrors(A,b) # Verificação de erros
+    assertValidSystem(A,b) # Verificação de erros
 
     n = b.size
 
@@ -52,14 +52,3 @@ def GMRES (A,b,tolerance = 1e-6):
             return x,ERR
 
     raise LinAlgError ('Singular Matrix') # Matriz muito mal condicionada
-
-def _testForErrors (A,b):
-    err = (
-        len(A.shape) != 2 or \
-        A.shape[0] != A.shape[1] or \
-        len(b.shape) != 1 or \
-        A.shape[0] != b.shape[0]
-    )
-
-    if err:
-        raise ValueError ('Invalid matrix shapes for solving linear system')
