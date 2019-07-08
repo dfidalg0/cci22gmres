@@ -14,7 +14,7 @@ for i in range(N):
 
 l,v = eig(A)
 
-methods = [GMRES,GaussElimination,solve]
+methods = [GMRES,GaussElimination,NumpySolve]
 
 T = {
     method.__name__ : [] for method in methods
