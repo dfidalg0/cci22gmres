@@ -46,7 +46,7 @@ def GMRES (A,b,tolerance = 1e-6):
         H[j:j+2,j] = applyGivensRotation(rot,H[j:j+2,j])
         u[j:j+2] = applyGivensRotation(rot,u[j:j+2])
 
-        ERR[j] = err = abs(rotations[j][0]*err) # Erro calculado com base nas rotações de Givens acumuladas
+        ERR[j] = err = abs(rot[0]*err) # Erro calculado com base nas rotações de Givens acumuladas
 
         if err < tolerance:
             # Determinação da solução de quadrados mínimos
