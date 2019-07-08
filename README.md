@@ -4,12 +4,15 @@
 <table>
     <tr>
         <td> Python
+        <td> 3.6.7
     </tr>
     <tr>
         <td> numpy
+        <td> 1.16.3
     </tr>
     <tr>
         <td> matplotlib
+        <td> 3.0.3
     </tr>
 </table>
 

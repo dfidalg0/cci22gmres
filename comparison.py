@@ -6,16 +6,20 @@ from timeit import default_timer
 
 N = 100
 
+# Randomizando matriz A
 A = rand(N,N)*100
 
+# Tornando A simétrica para garantir que todos os seus autovalores são reais
 for i in range(N):
     for j in range(i):
         A[i,j] = A[j,i]
 
 l,v = eig(A)
 
+# Métodos de resolução a serem utilizados
 methods = [GMRES,GaussElimination,NumpySolve]
 
+# Tempos de execução de cada método
 T = {
     method.__name__ : [] for method in methods
 }
@@ -39,6 +43,7 @@ for method in methods:
         print('\rProgress: {:3d}%'.format((n*100)//N),end = '')
     print()
 
+# Plot do gráfico
 graphs = []
 
 legends = T.keys()
