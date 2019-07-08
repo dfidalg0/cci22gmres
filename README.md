@@ -34,6 +34,8 @@ O script *comparison.py* compara os três métodos presentes na resolução de u
 
 O script *gmres_tests.py* verifica se o algoritmo *GMRES* está se comportando corretamente.
 
+O script *error_gmres* plota os gráficos de decaímento de erro no algoritmo *GMRES*
+
 ## Funções
 
 ~~~python
