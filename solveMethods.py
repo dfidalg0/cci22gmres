@@ -40,7 +40,7 @@ def GMRES (A,b,tolerance = 1e-6):
         h = norm(v)
         H[j+1,j] = h
 
-        # Determinação da solução de mínimos quadrados Hz = Qj'||b||e1
+        # Determinação do sistema triangular de quadrados mínimos
         rot = rotations[j] = getGivensRotation(H[j:j+2,j])
 
         H[j:j+2,j] = applyGivensRotation(rot,H[j:j+2,j])
@@ -49,6 +49,7 @@ def GMRES (A,b,tolerance = 1e-6):
         ERR[j] = err = abs(rotations[j][0]*err) # Erro calculado com base nas rotações de Givens acumuladas
 
         if err < tolerance:
+            # Determinação da solução de quadrados mínimos
             z = triangularSolve(H[:j+1,:j+1],u[:j+1])
             x = Q[:,:j+1].dot(z)
             ERR = array(ERR)
