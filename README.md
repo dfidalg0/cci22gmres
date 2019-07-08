@@ -40,6 +40,7 @@ GMRES (A,b, tolerance=1e-6)
 > Argumentos:
 > - A: Array quadrado do numpy
 > - b: Array linear do numpy
+> - tolerance : Maior erro de aproximação aceitável
 >
 > Retorno:
 > - x : Solução do sistema Ax = b
